@@ -7,7 +7,8 @@
         xmlns:models="clr-namespace:Installer_Script_Generator.Models"
         mc:Ignorable="d"
         Title="Installer Script Generator"
-        Height="450" Width="800">
+        Height="450" Width="800"
+        Closing="SaveConfigurationsHistory">
     <Window.Resources>
         <models:PathToFolderNameConverter x:Key="PathToFolderNameConverter"/>
     </Window.Resources>
@@ -51,7 +52,7 @@
 
         <StackPanel Grid.Row="5" Margin="4">
             <Button Content="Save Configuration" Padding="2" Margin="4" Click="SaveConfiguration"/>
-            <Button Content="Load Configuration" Padding="2" Margin="4"/>
+            <Button Content="Load Configuration" Padding="2" Margin="4" Click="LoadConfiguration"/>
             <Button Content="Delete Configuration" Padding="2" Margin="4"/>
         </StackPanel>
         <ListView Grid.Row="5" x:Name="configurationsListView"  Grid.Column="1" Margin="4">

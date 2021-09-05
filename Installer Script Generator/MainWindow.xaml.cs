@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-//using System.Xml;
 using Path = System.IO.Path;
 
 namespace Installer_Script_Generator
@@ -120,19 +119,34 @@ namespace Installer_Script_Generator
 
         private void SaveConfiguration(object sender, RoutedEventArgs e)
         {
-            Configuration configuration = new(pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
-
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Title = $"Save {Settings.Default.ConfigurationFile} File";
             dlg.Filter = $"{Settings.Default.ConfigurationFile} Files(*{Settings.Default.ConfigurationExtension})|*{Settings.Default.ConfigurationExtension}";
 
             if (dlg.ShowDialog() == true)
             {
+                Configuration configuration = new(dlg.FileName, pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
                 string json = JsonConvert.SerializeObject(configuration, Formatting.Indented);
                 File.WriteAllText(dlg.FileName, json);
+
+                configurations.Add(configuration);
             }
-            configurations.Add(configuration);
-            
+        }
+
+        private void SaveConfigurationsHistory(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void LoadConfiguration(object sender, RoutedEventArgs e)
+        {
+            if (configurationsListView.SelectedItem is Configuration selectedConfiguration)
+            {
+                pathLabel.Content = selectedConfiguration.ReleasePath;
+                versionTxt.Text = selectedConfiguration.Version;
+                extensionTxt.Text = selectedConfiguration.FileExtension;
+                fileTypeTxt.Text = selectedConfiguration.FileType;
+            }
         }
     }
 }

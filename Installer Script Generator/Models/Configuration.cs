@@ -7,13 +7,15 @@ namespace Installer_Script_Generator.Models
 {
     public class Configuration
     {
+        public string ConfigurationPath { get; set; }
         public string ReleasePath { get; set; }
         public string Version { get; set; }
         public string FileExtension { get; set; }
         public string FileType { get; set; }
 
-        public Configuration(string releasePath, string version, string fileExtension = "", string fileType = "")
+        public Configuration(string configurationPath, string releasePath, string version, string fileExtension = "", string fileType = "")
         {
+            ConfigurationPath = configurationPath;
             ReleasePath = releasePath;
             Version = version;
             FileExtension = fileExtension;
