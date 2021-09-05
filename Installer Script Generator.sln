@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31423.177
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer Script Generator", "Installer Script Generator\Installer Script Generator.csproj", "{88D8FE8C-F4B1-4878-9457-D2A6AF0CDEC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88D8FE8C-F4B1-4878-9457-D2A6AF0CDEC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D8FE8C-F4B1-4878-9457-D2A6AF0CDEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D8FE8C-F4B1-4878-9457-D2A6AF0CDEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D8FE8C-F4B1-4878-9457-D2A6AF0CDEC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C66BE48E-5528-4E48-B945-A96D7C52106C}
+	EndGlobalSection
+EndGlobal
