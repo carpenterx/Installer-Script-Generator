@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Security.Policy;
 using System.Windows;
 using Path = System.IO.Path;
 
@@ -41,7 +42,19 @@ namespace Installer_Script_Generator
             basicTemplate = ReadResource(TEMPLATE_NAME);
             fileAssociationTemplate = ReadResource(FILE_ASSOCIATION_TEMPLATE_NAME);
 
+            LoadConfigurationsHistory();
+
             configurationsListView.ItemsSource = configurations;
+        }
+
+        private void LoadConfigurationsHistory()
+        {
+            string configurationsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APPLICATION_FOLDER, CONFIG_FILE_NAME);
+            
+            if (File.Exists(configurationsPath))
+            {
+                configurations = JsonConvert.DeserializeObject<ObservableCollection<Configuration>>(File.ReadAllText(configurationsPath));
+            }
         }
 
         private string ReadResource(string fileName)
