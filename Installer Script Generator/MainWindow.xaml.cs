@@ -7,7 +7,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
-using System.Security.Policy;
 using System.Windows;
 using Path = System.IO.Path;
 
@@ -160,6 +159,14 @@ namespace Installer_Script_Generator
                 versionTxt.Text = selectedConfiguration.Version;
                 extensionTxt.Text = selectedConfiguration.FileExtension;
                 fileTypeTxt.Text = selectedConfiguration.FileType;
+            }
+        }
+
+        private void RemoveConfiguration(object sender, RoutedEventArgs e)
+        {
+            if (configurationsListView.SelectedItem is Configuration selectedConfiguration)
+{
+                configurations.Remove(selectedConfiguration);
             }
         }
     }

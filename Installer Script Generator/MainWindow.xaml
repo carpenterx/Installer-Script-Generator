@@ -53,7 +53,7 @@
         <StackPanel Grid.Row="5" Margin="4">
             <Button Content="Add Configuration" Padding="2" Margin="4" Click="AddConfiguration"/>
             <Button Content="Load Configuration" Padding="2" Margin="4" Click="LoadConfiguration"/>
-            <Button Content="Delete Configuration" Padding="2" Margin="4"/>
+            <Button Content="Remove Configuration" Padding="2" Margin="4" Click="RemoveConfiguration"/>
         </StackPanel>
         <ListView Grid.Row="5" x:Name="configurationsListView"  Grid.Column="1" Margin="4">
             <ListView.ItemContainerStyle>
