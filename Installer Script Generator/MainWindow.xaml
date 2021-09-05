@@ -23,19 +23,25 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Folder: " Margin="2" Padding="2" Height="24"/>
-        <Label x:Name="pathLabel" Grid.Column="1" d:Content="Path" Margin="2" Padding="2" Height="24" AllowDrop="True" Drop="DropFolder" BorderBrush="#FF157DD3" BorderThickness="1"/>
-        <Button Grid.Column="2" Content="Browse" Margin="2" Padding="2" Width="60" Height="24" Click="BrowseToReleaseClick"/>
+        <Label Content="Folder: " Margin="4" Padding="2" Height="24"/>
+        <Label x:Name="pathLabel" Grid.Column="1" d:Content="Path" Margin="4" Padding="2" Height="24" AllowDrop="True" Drop="DropFolder" BorderBrush="#FF157DD3" BorderThickness="1"/>
+        <Button Grid.Column="2" Content="Browse" Margin="4" Padding="2" Width="60" Height="24" Click="BrowseToReleaseClick"/>
 
-        <Label Grid.Row="1" Content="Version: " Padding="2" Margin="2" Height="24"/>
-        <TextBox x:Name="versionTxt" Grid.Row="1" Grid.Column="1" Width="100" Text="1.0.0" Padding="2" Margin="2" HorizontalAlignment="Left" Height="24" />
+        <Label Grid.Row="1" Content="Version: " Padding="2" Margin="4" Height="24"/>
+        <TextBox x:Name="versionTxt" Grid.Row="1" Grid.Column="1" Width="160" Text="1.0.0" Padding="2" Margin="4" HorizontalAlignment="Left" Height="24" />
 
-        <Label Grid.Row="2" Content="Extension: " Padding="2" Margin="2" Height="24"/>
-        <TextBox x:Name="extensionTxt" Grid.Row="2" Grid.Column="1" Width="100" Padding="2" Margin="2" HorizontalAlignment="Left" Height="24" />
+        <Label Grid.Row="2" Content="Extension: " Padding="2" Margin="4" Height="24"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <TextBox x:Name="extensionTxt" Width="160" Padding="2" Margin="4" HorizontalAlignment="Left" Height="24"/>
+            <TextBlock Text="example: 'json'" Padding="2" Margin="4"/>
+        </StackPanel>
 
-        <Label Grid.Row="3" Content="File Type: " Padding="2" Margin="2" Height="24"/>
-        <TextBox x:Name="fileTypeTxt" Grid.Row="3" Grid.Column="1" Width="100" Padding="2" Margin="2" HorizontalAlignment="Left" Height="24" />
+        <Label Grid.Row="3" Content="File Type: " Padding="2" Margin="4" Height="24"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <TextBox x:Name="fileTypeTxt" Width="160" Padding="2" Margin="4" HorizontalAlignment="Left" Height="24" />
+            <TextBlock Text="example: 'Json'" Padding="2" Margin="4"/>
+        </StackPanel>
 
-        <Button Grid.Row="5" Grid.ColumnSpan="3" Width="60" Content="Save" Margin="2" Padding="2" Height="24" Click="SaveScriptClick"/>
+        <Button Grid.Row="5" Grid.ColumnSpan="3" Width="60" Content="Save" Margin="4" Padding="2" Height="24" Click="SaveScriptClick"/>
     </Grid>
 </Window>

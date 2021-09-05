@@ -11,7 +11,7 @@ UninstallDisplayIcon={app}\{#AppExeName}
 Compression=lzma2
 SolidCompression=yes
 OutputDir="{#AppName} Installer"
-OutputBaseFilename="{#AppName} Installer"
+OutputBaseFilename="{#AppName} APP_VERSION"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; \

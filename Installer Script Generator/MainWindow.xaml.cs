@@ -85,7 +85,7 @@ namespace Installer_Script_Generator
                 SaveFileDialog dlg = new();
                 dlg.Title = "Save Iss Script";
                 dlg.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts");
-                dlg.FileName = Path.GetFileName(directoryPath);
+                dlg.FileName = $"{Path.GetFileName(directoryPath)} {versionTxt.Text}";
                 dlg.DefaultExt = ".iss";
                 dlg.Filter = "ISS Script (.iss)|*.iss";
 
