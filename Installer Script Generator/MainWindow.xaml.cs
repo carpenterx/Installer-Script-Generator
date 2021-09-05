@@ -29,6 +29,9 @@ namespace Installer_Script_Generator
         private const string EXTENSION_STRING = "[EXTENSION]";
         private const string FILE_TYPE_STRING = "[FILE_TYPE]";
 
+        private const string CONFIG_FILE_NAME = "configurations.json";
+        private const string APPLICATION_FOLDER = "Installer Script Generator";
+
         private ObservableCollection<Configuration> configurations = new();
 
         public MainWindow()
@@ -135,7 +138,14 @@ namespace Installer_Script_Generator
 
         private void SaveConfigurationsHistory(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            string applicationDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APPLICATION_FOLDER);
+            if (!Directory.Exists(applicationDirectory))
+            {
+                Directory.CreateDirectory(applicationDirectory);
+            }
+            string json = JsonConvert.SerializeObject(configurations, Formatting.Indented);
+            string configurationsPath = Path.Combine(applicationDirectory, CONFIG_FILE_NAME);
+            File.WriteAllText(configurationsPath, json);
         }
 
         private void LoadConfiguration(object sender, RoutedEventArgs e)
