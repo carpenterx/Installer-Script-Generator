@@ -51,7 +51,7 @@
         <Button Grid.Row="4" Grid.ColumnSpan="3" Width="80" Content="Save Script" Margin="4" Padding="2" Height="24" Click="SaveScriptClick"/>
 
         <StackPanel Grid.Row="5" Margin="4">
-            <Button Content="Save Configuration" Padding="2" Margin="4" Click="SaveConfiguration"/>
+            <Button Content="Add Configuration" Padding="2" Margin="4" Click="AddConfiguration"/>
             <Button Content="Load Configuration" Padding="2" Margin="4" Click="LoadConfiguration"/>
             <Button Content="Delete Configuration" Padding="2" Margin="4"/>
         </StackPanel>

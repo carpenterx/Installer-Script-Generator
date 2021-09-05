@@ -133,20 +133,11 @@ namespace Installer_Script_Generator
             return outputScript;
         }
 
-        private void SaveConfiguration(object sender, RoutedEventArgs e)
+        private void AddConfiguration(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = $"Save {Settings.Default.ConfigurationFile} File";
-            dlg.Filter = $"{Settings.Default.ConfigurationFile} Files(*{Settings.Default.ConfigurationExtension})|*{Settings.Default.ConfigurationExtension}";
+            Configuration configuration = new(pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
 
-            if (dlg.ShowDialog() == true)
-            {
-                Configuration configuration = new(dlg.FileName, pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
-                string json = JsonConvert.SerializeObject(configuration, Formatting.Indented);
-                File.WriteAllText(dlg.FileName, json);
-
-                configurations.Add(configuration);
-            }
+            configurations.Add(configuration);
         }
 
         private void SaveConfigurationsHistory(object sender, System.ComponentModel.CancelEventArgs e)
