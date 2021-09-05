@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Installer_Script_Generator"
+        xmlns:models="clr-namespace:Installer_Script_Generator.Models"
         mc:Ignorable="d"
-        Title="Installer Script Generator" Height="450" Width="800">
+        Title="Installer Script Generator"
+        Height="450" Width="800">
+    <Window.Resources>
+        <models:PathToFolderNameConverter x:Key="PathToFolderNameConverter"/>
+    </Window.Resources>
     <Grid Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -63,7 +68,7 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         
-                        <TextBlock Text="{Binding ReleasePath}" Margin="2" />
+                        <TextBlock Text="{Binding ReleasePath, Converter={StaticResource PathToFolderNameConverter}}" Margin="2" />
                         <TextBlock Grid.Column="1" Text="{Binding Version}" Margin="2" />
                     </Grid>
                 </DataTemplate>
