@@ -13,8 +13,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <!--<RowDefinition Height="*" />-->
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
         <Button Grid.Column="2" Content="Browse" Margin="4" Padding="2" Width="60" Height="24" Click="BrowseToReleaseClick"/>
 
         <Label Grid.Row="1" Content="Version: " Padding="2" Margin="4" Height="24"/>
-        <TextBox x:Name="versionTxt" Grid.Row="1" Grid.Column="1" Width="160" Text="1.0.0" Padding="2" Margin="4" HorizontalAlignment="Left" Height="24" />
+        <TextBox Grid.Row="1" x:Name="versionTxt" Grid.Column="1" Width="160" Text="1.0.0" Padding="2" Margin="4" HorizontalAlignment="Left" Height="24" />
 
         <Label Grid.Row="2" Content="Extension: " Padding="2" Margin="4" Height="24"/>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
@@ -42,6 +42,32 @@
             <TextBlock Text="example: 'Json'" Padding="2" Margin="4"/>
         </StackPanel>
 
-        <Button Grid.Row="5" Grid.ColumnSpan="3" Width="60" Content="Save" Margin="4" Padding="2" Height="24" Click="SaveScriptClick"/>
+        <Button Grid.Row="4" Grid.ColumnSpan="3" Width="80" Content="Save Script" Margin="4" Padding="2" Height="24" Click="SaveScriptClick"/>
+
+        <StackPanel Grid.Row="5" Margin="4">
+            <Button Content="Save Configuration" Padding="2" Margin="4" Click="SaveConfiguration"/>
+            <Button Content="Load Configuration" Padding="2" Margin="4"/>
+            <Button Content="Delete Configuration" Padding="2" Margin="4"/>
+        </StackPanel>
+        <ListView Grid.Row="5" x:Name="configurationsListView"  Grid.Column="1" Margin="4">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Text="{Binding ReleasePath}" Margin="2" />
+                        <TextBlock Grid.Column="1" Text="{Binding Version}" Margin="2" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

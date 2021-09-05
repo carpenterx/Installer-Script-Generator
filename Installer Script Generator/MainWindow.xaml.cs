@@ -1,9 +1,14 @@
-﻿using Microsoft.Win32;
+﻿using Installer_Script_Generator.Models;
+using Installer_Script_Generator.Properties;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+//using System.Xml;
 using Path = System.IO.Path;
 
 namespace Installer_Script_Generator
@@ -25,12 +30,16 @@ namespace Installer_Script_Generator
         private const string EXTENSION_STRING = "[EXTENSION]";
         private const string FILE_TYPE_STRING = "[FILE_TYPE]";
 
+        private ObservableCollection<Configuration> configurations = new();
+
         public MainWindow()
         {
             InitializeComponent();
 
             basicTemplate = ReadResource(TEMPLATE_NAME);
             fileAssociationTemplate = ReadResource(FILE_ASSOCIATION_TEMPLATE_NAME);
+
+            configurationsListView.ItemsSource = configurations;
         }
 
         private string ReadResource(string fileName)
@@ -83,11 +92,11 @@ namespace Installer_Script_Generator
                 }
 
                 SaveFileDialog dlg = new();
-                dlg.Title = "Save Iss Script";
+                dlg.Title = $"Save {Settings.Default.ScriptFile}";
                 dlg.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts");
                 dlg.FileName = $"{Path.GetFileName(directoryPath)} {versionTxt.Text}";
-                dlg.DefaultExt = ".iss";
-                dlg.Filter = "ISS Script (.iss)|*.iss";
+                dlg.DefaultExt = Settings.Default.ScriptExtension;
+                dlg.Filter = $"{Settings.Default.ScriptFile} ({Settings.Default.ScriptExtension})|*{Settings.Default.ScriptExtension}";
 
                 if (dlg.ShowDialog() == true)
                 {
@@ -107,6 +116,23 @@ namespace Installer_Script_Generator
             //Clipboard.SetText(outputScript);
 
             return outputScript;
+        }
+
+        private void SaveConfiguration(object sender, RoutedEventArgs e)
+        {
+            Configuration configuration = new(pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
+
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = $"Save {Settings.Default.ConfigurationFile} File";
+            dlg.Filter = $"{Settings.Default.ConfigurationFile} Files(*{Settings.Default.ConfigurationExtension})|*{Settings.Default.ConfigurationExtension}";
+
+            if (dlg.ShowDialog() == true)
+            {
+                string json = JsonConvert.SerializeObject(configuration, Formatting.Indented);
+                File.WriteAllText(dlg.FileName, json);
+            }
+            configurations.Add(configuration);
+            
         }
     }
 }
