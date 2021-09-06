@@ -114,6 +114,10 @@ namespace Installer_Script_Generator
 
                 if (dlg.ShowDialog() == true)
                 {
+                    Configuration configuration = new(pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
+
+                    configurations.Add(configuration);
+
                     File.WriteAllText(dlg.FileName, outputScript);
                 }
             }
@@ -165,7 +169,7 @@ namespace Installer_Script_Generator
         private void RemoveConfiguration(object sender, RoutedEventArgs e)
         {
             if (configurationsListView.SelectedItem is Configuration selectedConfiguration)
-{
+            {
                 configurations.Remove(selectedConfiguration);
             }
         }
