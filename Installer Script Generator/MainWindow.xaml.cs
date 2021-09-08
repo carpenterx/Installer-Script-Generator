@@ -1,5 +1,6 @@
 ﻿using Installer_Script_Generator.Models;
 using Installer_Script_Generator.Properties;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
@@ -15,7 +16,7 @@ namespace Installer_Script_Generator
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private const string APP_RESOURCES_NAMESPACE = "Installer_Script_Generator.Resources.";
         private const string TEMPLATE_NAME = "Script Template.iss";
