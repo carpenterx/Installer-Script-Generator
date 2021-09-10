@@ -60,12 +60,7 @@
             <Button BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Load Configuration" Padding="2" Margin="4" Click="LoadConfiguration"/>
             <Button BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Remove Configuration" Padding="2" Margin="4" Click="RemoveConfiguration"/>
         </StackPanel>
-        <ListView Grid.Row="5" Grid.Column="1" x:Name="configurationsListView" ScrollViewer.CanContentScroll="False" Margin="4">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
+        <ListView Grid.Row="5" Grid.Column="1" x:Name="configurationsListView" ScrollViewer.CanContentScroll="False" Margin="4" ItemContainerStyle="{DynamicResource MahApps.Styles.ListViewItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="4">
@@ -73,7 +68,7 @@
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <TextBlock Text="{Binding ReleasePath, Converter={StaticResource PathToFolderNameConverter}}" Margin="2" />
                         <TextBlock Grid.Column="1" Text="{Binding Version}" Margin="2" />
                     </Grid>
