@@ -6,9 +6,11 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Shapes;
 using Path = System.IO.Path;
 
 namespace Installer_Script_Generator
@@ -173,6 +175,11 @@ namespace Installer_Script_Generator
             {
                 configurations.Remove(selectedConfiguration);
             }
+        }
+
+        private void OpenInstallersFolder(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts"));
         }
     }
 }

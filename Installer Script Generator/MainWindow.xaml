@@ -99,5 +99,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Grid.Row="5" Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Open" Margin="4" Padding="2" Width="60" Height="28" Click="OpenInstallersFolder" VerticalAlignment="Top"/>
     </Grid>
 </mah:MetroWindow>
