@@ -1,0 +1,44 @@
+﻿<mah:MetroWindow x:Class="Installer_Script_Generator.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:properties="clr-namespace:Installer_Script_Generator.Properties"
+        xmlns:local="clr-namespace:Installer_Script_Generator.Windows" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="Settings"
+        Height="450" Width="800"
+        TitleCharacterCasing="Normal"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.ColumnSpan="3" Style="{DynamicResource MahApps.Styles.Button.Circle}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsCancel="True" Margin="4">
+            <iconPacks:PackIconVaadinIcons Kind="ArrowLeft" Margin="4" Width="30" Height="30" Foreground="{StaticResource MahApps.Brushes.Accent}"/>
+        </Button>
+        
+        <Label Grid.Row="1" Grid.ColumnSpan="3" Content="Settings" FontSize="28" HorizontalAlignment="Center" Margin="10,30,10,60"/>
+
+        <Label Grid.Row="2" Content="Releases Folder: " VerticalContentAlignment="Center" Margin="4" Padding="2" Height="28"/>
+        <Label Grid.Row="2" Grid.Column="1" x:Name="releasesLabel" Content="{Binding Source={x:Static properties:Settings.Default}, Path=ReleasesFolder, Mode=TwoWay}" Margin="4" Padding="2" Height="28" AllowDrop="True" Drop="DropFolder" BorderBrush="{StaticResource MahApps.Brushes.Accent}" BorderThickness="1" VerticalContentAlignment="Center"/>
+        <Button Grid.Row="2" Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Browse" Margin="4" Padding="2" Width="60" Height="28" Click="BrowseToReleases"/>
+
+        <Label Grid.Row="3" Content="Scripts Folder: " VerticalContentAlignment="Center" Margin="4" Padding="2" Height="28"/>
+        <Label Grid.Row="3" Grid.Column="1" x:Name="scriptsLabel" Content="{Binding Source={x:Static properties:Settings.Default}, Path=ScriptsFolder, Mode=TwoWay}" Margin="4" Padding="2" Height="28" AllowDrop="True" Drop="DropFolder" BorderBrush="{StaticResource MahApps.Brushes.Accent}" BorderThickness="1" VerticalContentAlignment="Center"/>
+        <Button Grid.Row="3" Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Browse" Margin="4" Padding="2" Width="60" Height="28" Click="BrowseToScripts"/>
+    </Grid>
+</mah:MetroWindow>

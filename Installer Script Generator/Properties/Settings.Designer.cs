@@ -40,5 +40,29 @@ namespace Installer_Script_Generator.Properties {
                 return ((string)(this["ScriptFile"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ReleasesFolder {
+            get {
+                return ((string)(this["ReleasesFolder"]));
+            }
+            set {
+                this["ReleasesFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ScriptsFolder {
+            get {
+                return ((string)(this["ScriptsFolder"]));
+            }
+            set {
+                this["ScriptsFolder"] = value;
+            }
+        }
     }
 }

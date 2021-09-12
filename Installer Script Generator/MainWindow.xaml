@@ -6,12 +6,14 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:Installer_Script_Generator"
         xmlns:models="clr-namespace:Installer_Script_Generator.Models"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Installer Script Generator"
         Height="450" Width="800"
         TitleCharacterCasing="Normal"
-        Closing="SaveConfigurationsHistory"
-    xmlns:converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
+        Closing="SaveData"
+        KeyDown="ShowSettingsKeyDown"
+                 Loaded="TestSettings">
     <Window.Resources>
         <models:PathToFolderNameConverter x:Key="PathToFolderNameConverter"/>
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
@@ -48,6 +50,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <!--<RowDefinition Height="*" />-->
         </Grid.RowDefinitions>
@@ -58,33 +61,37 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Folder: " VerticalContentAlignment="Center" Margin="4" Padding="2" Height="28"/>
-        <Label x:Name="pathLabel" Grid.Column="1" d:Content="Path" Margin="4" Padding="2" Height="28" AllowDrop="True" Drop="DropFolder" BorderBrush="{StaticResource MahApps.Brushes.Accent}" BorderThickness="1" VerticalContentAlignment="Center"/>
-        <Button Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Browse" Margin="4" Padding="2" Width="60" Height="28" Click="BrowseToReleaseClick"/>
+        <Button Grid.ColumnSpan="3" Style="{DynamicResource MahApps.Styles.Button.Circle}" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="SettingsClick" Margin="4">
+            <iconPacks:PackIconVaadinIcons Kind="CogOutline" Margin="4" Width="30" Height="30" Foreground="{StaticResource MahApps.Brushes.Accent}"/>
+        </Button>
 
-        <Label Grid.Row="1" Content="Version: " VerticalContentAlignment="Center" Padding="2" Margin="4" Height="28"/>
-        <TextBox Grid.Row="1" x:Name="versionTxt"  Grid.Column="1" VerticalContentAlignment="Center" Width="160" Text="1.0.0" Padding="2" Margin="4" HorizontalAlignment="Left" Height="28"/>
+        <Label Grid.Row="1" Content="Folder: " VerticalContentAlignment="Center" Margin="4" Padding="2" Height="28"/>
+        <Label Grid.Row="1" Grid.Column="1" x:Name="pathLabel" d:Content="Path" Margin="4" Padding="2" Height="28" AllowDrop="True" Drop="DropFolder" BorderBrush="{StaticResource MahApps.Brushes.Accent}" BorderThickness="1" VerticalContentAlignment="Center"/>
+        <Button Grid.Row="1" Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Browse" Margin="4" Padding="2" Width="60" Height="28" Click="BrowseToReleaseClick"/>
 
-        <Label Grid.Row="2" Content="Extension: " VerticalContentAlignment="Center" Padding="2" Margin="4" Height="28"/>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+        <Label Grid.Row="2" Content="Version: " VerticalContentAlignment="Center" Padding="2" Margin="4" Height="28"/>
+        <TextBox Grid.Row="2" x:Name="versionTxt"  Grid.Column="1" VerticalContentAlignment="Center" Width="160" Text="1.0.0" Padding="2" Margin="4" HorizontalAlignment="Left" Height="28"/>
+
+        <Label Grid.Row="3" Content="Extension: " VerticalContentAlignment="Center" Padding="2" Margin="4" Height="28"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
             <TextBox x:Name="extensionTxt" VerticalContentAlignment="Center" Width="160" Padding="2" Margin="4" HorizontalAlignment="Left" Height="28"/>
             <TextBlock Text="example: 'json'" VerticalAlignment="Center" Padding="2" Margin="4"/>
         </StackPanel>
 
-        <Label Grid.Row="3" Content="File Type: " VerticalContentAlignment="Center" Padding="2" Margin="4" Height="28"/>
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+        <Label Grid.Row="4" Content="File Type: " VerticalContentAlignment="Center" Padding="2" Margin="4" Height="28"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
             <TextBox x:Name="fileTypeTxt" VerticalContentAlignment="Center" Width="160" Padding="2" Margin="4" HorizontalAlignment="Left" Height="28" />
             <TextBlock Text="example: 'Json'" VerticalAlignment="Center" Padding="2" Margin="4"/>
         </StackPanel>
 
-        <Button Grid.Row="4" Grid.ColumnSpan="3" Background="{StaticResource MahApps.Brushes.Accent}" Width="80" Content="Save Script" Margin="4" Padding="2" Height="28" Click="SaveScriptClick"/>
+        <Button Grid.Row="5" Grid.ColumnSpan="3" Background="{StaticResource MahApps.Brushes.Accent}" Width="80" Content="Save Script" Margin="4" Padding="2" Height="28" Click="SaveScriptClick"/>
 
-        <StackPanel Grid.Row="5" Margin="2">
+        <StackPanel Grid.Row="6" Margin="2">
             <Button BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Add Configuration" Height="28" Padding="2" Margin="4" Click="AddConfiguration"/>
             <Button BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Load Configuration" Height="28" Padding="2" Margin="4" Click="LoadConfiguration"/>
             <Button BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Remove Configuration" Height="28" Padding="2" Margin="4" Click="RemoveConfiguration"/>
         </StackPanel>
-        <ListView Grid.Row="5" Grid.Column="1" x:Name="configurationsListView" ScrollViewer.CanContentScroll="False" Margin="4" ItemContainerStyle="{DynamicResource MahApps.Styles.ListViewItem}">
+        <ListView Grid.Row="6" Grid.Column="1" x:Name="configurationsListView" ScrollViewer.CanContentScroll="False" Margin="4" ItemContainerStyle="{DynamicResource MahApps.Styles.ListViewItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="4">
@@ -100,6 +107,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Grid.Row="5" Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Open" Margin="4" Padding="2" Width="60" Height="28" Click="OpenInstallersFolder" VerticalAlignment="Top"/>
+        <Button Grid.Row="6" Grid.Column="2" BorderBrush="{StaticResource MahApps.Brushes.Accent}" Foreground="{StaticResource MahApps.Brushes.Accent}" Content="Open" Margin="4" Padding="2" Width="60" Height="28" Click="OpenScriptsFolder" VerticalAlignment="Top"/>
     </Grid>
 </mah:MetroWindow>

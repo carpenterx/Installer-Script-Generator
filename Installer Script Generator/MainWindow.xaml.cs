@@ -1,5 +1,6 @@
 ﻿using Installer_Script_Generator.Models;
 using Installer_Script_Generator.Properties;
+using Installer_Script_Generator.Windows;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -74,11 +75,13 @@ namespace Installer_Script_Generator
 
         private void BrowseToReleaseClick(object sender, RoutedEventArgs e)
         {
-            CommonOpenFileDialog dialog = new()
+            CommonOpenFileDialog dialog = new();
+            dialog.IsFolderPicker = true;
+            dialog.Title = "Select Release Folder";
+            if (Directory.Exists(Settings.Default.ReleasesFolder))
             {
-                IsFolderPicker = true,
-                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases")
-            };
+                dialog.InitialDirectory = Settings.Default.ReleasesFolder;
+            }
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 pathLabel.Content = dialog.FileName;
@@ -116,7 +119,12 @@ namespace Installer_Script_Generator
 
                 SaveFileDialog dlg = new();
                 dlg.Title = $"Save {Settings.Default.ScriptFile}";
-                dlg.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts");
+                if (Directory.Exists(Settings.Default.ScriptsFolder))
+                {
+                    //dlg.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts");
+
+                    dlg.InitialDirectory = Settings.Default.ScriptsFolder;
+                }
                 dlg.FileName = $"{Path.GetFileName(directoryPath)} {versionTxt.Text}";
                 dlg.DefaultExt = Settings.Default.ScriptExtension;
                 dlg.Filter = $"{Settings.Default.ScriptFile} ({Settings.Default.ScriptExtension})|*{Settings.Default.ScriptExtension}";
@@ -154,7 +162,13 @@ namespace Installer_Script_Generator
             }
         }
 
-        private void SaveConfigurationsHistory(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SaveData(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveConfigurationsHistory();
+            Settings.Default.Save();
+        }
+
+        private void SaveConfigurationsHistory()
         {
             string applicationDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APPLICATION_FOLDER);
             if (!Directory.Exists(applicationDirectory))
@@ -185,13 +199,48 @@ namespace Installer_Script_Generator
             }
         }
 
-        private void OpenInstallersFolder(object sender, RoutedEventArgs e)
+        private void OpenScriptsFolder(object sender, RoutedEventArgs e)
         {
-            Process.Start("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts"));
+            //Process.Start("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts"));
+            if(Directory.Exists(Settings.Default.ScriptsFolder))
+            {
+                Process.Start("explorer.exe", Settings.Default.ScriptsFolder);
+            }
 
             TraversalRequest request = new(FocusNavigationDirection.Previous);
             request.Wrapped = true;
             (sender as Button).MoveFocus(request);
+        }
+
+        private void SettingsClick(object sender, RoutedEventArgs e)
+        {
+            ShowSettings();
+        }
+
+        private void ShowSettingsKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                ShowSettings();
+            }
+        }
+
+        private void ShowSettings()
+        {
+            SettingsWindow settingsWindow = new();
+            settingsWindow.Owner = this;
+            if (settingsWindow.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void TestSettings(object sender, RoutedEventArgs e)
+        {
+            if (!Directory.Exists(Settings.Default.ReleasesFolder) || !Directory.Exists(Settings.Default.ScriptsFolder))
+            {
+                ShowSettings();
+            }
         }
     }
 }

@@ -8,5 +8,11 @@
     <Setting Name="ScriptFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ISS</Value>
     </Setting>
+    <Setting Name="ReleasesFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ScriptsFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
