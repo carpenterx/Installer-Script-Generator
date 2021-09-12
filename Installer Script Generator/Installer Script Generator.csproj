@@ -6,7 +6,7 @@
     <RootNamespace>Installer_Script_Generator</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>file_type_script_icon_130178.ico</ApplicationIcon>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
