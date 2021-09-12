@@ -101,7 +101,7 @@ namespace Installer_Script_Generator
 
         private void SaveScriptClick(object sender, RoutedEventArgs e)
         {
-            string directoryPath = pathLabel.Content.ToString();
+            string directoryPath = pathLabel.Content?.ToString();
             if (Directory.Exists(directoryPath))
             {
                 string outputScript;
@@ -146,9 +146,12 @@ namespace Installer_Script_Generator
 
         private void AddConfiguration(object sender, RoutedEventArgs e)
         {
-            Configuration configuration = new(pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
+            if (pathLabel.Content != null)
+            {
+                Configuration configuration = new(pathLabel.Content.ToString(), versionTxt.Text, extensionTxt.Text, fileTypeTxt.Text);
 
-            configurations.Add(configuration);
+                configurations.Add(configuration);
+            }
         }
 
         private void SaveConfigurationsHistory(object sender, System.ComponentModel.CancelEventArgs e)
