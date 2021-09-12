@@ -235,7 +235,12 @@ namespace Installer_Script_Generator
             }
         }
 
-        private void TestSettings(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            TestSettings();
+        }
+
+        private void TestSettings()
         {
             if (!Directory.Exists(Settings.Default.ReleasesFolder) || !Directory.Exists(Settings.Default.ScriptsFolder))
             {

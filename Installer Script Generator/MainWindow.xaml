@@ -13,7 +13,7 @@
         TitleCharacterCasing="Normal"
         Closing="SaveData"
         KeyDown="ShowSettingsKeyDown"
-                 Loaded="TestSettings">
+        Loaded="OnLoaded">
     <Window.Resources>
         <models:PathToFolderNameConverter x:Key="PathToFolderNameConverter"/>
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">

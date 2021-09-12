@@ -47,6 +47,7 @@ namespace Installer_Script_Generator.Windows
             {
                 label.Content = dialog.FileName;
             }
+            Focus();
         }
     }
 }
