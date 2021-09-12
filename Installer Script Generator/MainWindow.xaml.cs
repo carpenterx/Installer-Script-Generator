@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using Path = System.IO.Path;
 
@@ -81,6 +83,10 @@ namespace Installer_Script_Generator
             {
                 pathLabel.Content = dialog.FileName;
             }
+
+            TraversalRequest request = new(FocusNavigationDirection.Next);
+            request.Wrapped = true;
+            (sender as Button).MoveFocus(request);
         }
 
         private void DropFolder(object sender, DragEventArgs e)
@@ -134,7 +140,6 @@ namespace Installer_Script_Generator
             outputScript = outputScript.Replace(APP_VERSION_STRING, versionTxt.Text);
             outputScript = outputScript.Replace(EXTENSION_STRING, extensionTxt.Text);
             outputScript = outputScript.Replace(FILE_TYPE_STRING, fileTypeTxt.Text);
-            //Clipboard.SetText(outputScript);
 
             return outputScript;
         }
@@ -180,6 +185,10 @@ namespace Installer_Script_Generator
         private void OpenInstallersFolder(object sender, RoutedEventArgs e)
         {
             Process.Start("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Releases", "Installer Scripts"));
+
+            TraversalRequest request = new(FocusNavigationDirection.Previous);
+            request.Wrapped = true;
+            (sender as Button).MoveFocus(request);
         }
     }
 }
